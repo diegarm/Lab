@@ -3,6 +3,12 @@ using System.Linq;
 
 internal class Program
 {
+    public delegate void Del(string message);
+    public static void DelegateMethod(string message)
+    {
+       Console.WriteLine(message);
+    }    
+
     private static void Main(string[] args)
     {
         ArrayList myArrayList = new ArrayList();
@@ -64,7 +70,7 @@ internal class Program
         Console.WriteLine("Sorted List");
         SortedList<int, string> mySortedList = new SortedList<int, string>();
         mySortedList.Add(2,"test");
-        //mySortedList.Add(2, "texte"); Does not allow duplicated or null keys. Keys must be unique.
+        //mySortedList.Add(2, "txt"); Does not allow duplicated or null keys. Keys must be unique.
         foreach (var item in mySortedList)
             Console.WriteLine(item);
 
@@ -111,6 +117,99 @@ internal class Program
         foreach (var word in wordQuery){
             Console.WriteLine($"{word}", word);
         }
+
+        Console.WriteLine("IEnumerable With Yield (Defer Execution)");
+        IEnumerable<int> GetNumbers()
+        {
+            yield return 0;
+            yield return 1;
+            yield return 2;
+            yield return 3;
+            yield return 4;
+        }
+
+        foreach (var item in GetNumbers())
+        {
+            Console.WriteLine(item);
+        }
+
+        Console.WriteLine("IEnumerable With For");
+        IEnumerable<int> GetNumbersWithFor()
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                yield return i;
+            }
+        }
+
+        foreach (var item in GetNumbersWithFor())
+        {
+            Console.WriteLine(item);
+        }
+
+        Console.WriteLine("Delegate Method");
+        Del handler = DelegateMethod;
+        handler("hello!");
+
+        Console.WriteLine("Using Func<X,X,X>");
+        Func<int, int, bool> testEquality = (x, y) => x == y; // test for equality
+        Func<int, int, int> sum = (x, y) => x + y; // test for equality
+        bool test01 = testEquality(1, 2); // false
+        bool test02 = testEquality(4, 4); // true
+        int sum01 = sum(4, 4); // true
+        Console.WriteLine(test01);
+        Console.WriteLine(test02);
+        Console.WriteLine(sum01);
+
+        Console.WriteLine("Increment with Func");
+        int n = 0;
+        Func<int> increment = () => n++;
+        increment(); //1
+        increment(); //2
+
+        Console.WriteLine(n);
+
+
+        Console.WriteLine("Func with Expression (isEven)");
+        Func<int, bool> isEven = x => x % 2 == 0;
+        Console.WriteLine(isEven(2));
+        Console.WriteLine(isEven(1));
+
+        Console.WriteLine("IEnumerable with Where");
+        int[] numbers = { 0, 30, 20, 15, 90, 85, 40, 9 };
+        IEnumerable<int> res = numbers.Where((n) => n <= 10);
+
+        foreach (var item in res)
+        {
+            Console.WriteLine(item);
+        }
+
+        Console.WriteLine("IEnumerable with Where Query");
+        var resultQuery = from n1 in numbers
+                  where n1 < 10
+                  select n1;
+
+        foreach (var item in resultQuery)
+            Console.WriteLine(item);
+
+
+        Console.WriteLine("Arraylist Times with Average");
+        var times = new ArrayList();
+        times.Add(243.53d);
+        times.Add(125.32d);
+        times.Add(104.23d);
+
+        double avg = times.Cast<double>().Average();
+
+        Console.WriteLine(avg);
+
+        Console.WriteLine("Evens");
+        int[] numbersEvens = { 0, 30, 20, 15, 90, 85, 40, 9 };
+        IEnumerable<int> evens = numbersEvens.Where(i => i % 2 == 0);
+        
+        foreach (var item in evens)
+            Console.WriteLine($"{item}");
+
 
     }
 }
