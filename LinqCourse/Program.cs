@@ -341,6 +341,23 @@ internal class Program
         Console.WriteLine(list.Count());
 
 
+        Console.WriteLine("=========================================");
+        Console.WriteLine("LINQ - List Distinct");
+        Console.WriteLine("=========================================");
+
+        var listDistinct = new List<int>() { 1,2,2,3,4,5,6,7,7,8,9,10 };
+
+        Console.WriteLine("Without Distinct");
+        foreach (var s in listDistinct) { Console.WriteLine(s); };
+
+        var listWithDistinct = listDistinct.Distinct();
+
+        Console.WriteLine("Distinct");
+        foreach (var s in listWithDistinct) { Console.WriteLine(s); };
+
+
+
+
     }
 
 
