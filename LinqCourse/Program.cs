@@ -274,6 +274,72 @@ internal class Program
         Console.WriteLine(list.ElementAtOrDefault(99));
 
 
+        Console.WriteLine("Any - checks if any of the elements of the sequence meets the indicated condition.");
+        Console.WriteLine(list.Any(n => n < 10));
+
+        Console.WriteLine("All(): checks if all elements of the sequence meet the indicated condition");
+        Console.WriteLine(list.All(n => n < 2));
+
+        Console.WriteLine("Contains(): indicates if the sequence contains the indicated element, one or more times.");
+        Console.WriteLine(list.Contains(2));
+
+
+
+        Console.WriteLine("=========================================");
+        Console.WriteLine("LINQ - GROUP BY");
+        Console.WriteLine("=========================================");
+        IList<Student> all = new List<Student>
+        {
+            new Student {First = "Diego", Last = "Bento", Score = 10},
+            new Student {First = "Claire", Last = "O'Donnell", Score = 6},
+            new Student {First = "Sven", Last = "Mortensen", Score = 3},
+            new Student {First = "Cesar", Last = "Garcia", Score = 6},
+            new Student {First = "Debra", Last = "Bento", Score = 10}
+        };
+        var grouped = all.GroupBy(s => s.Score);
+
+
+        foreach (IGrouping<int, Student> stg in grouped)
+        {
+            Console.WriteLine(stg.Key);
+            foreach (var s in stg)
+            {
+                Console.WriteLine($"{s.First} {s.Last}");
+            }
+        }
+
+
+        var grouped2 = all.GroupBy(s => new { s.Last, s.Score });
+
+
+        foreach (var stg in grouped2)
+        {
+            Console.WriteLine(stg.Key);
+            foreach (var s in stg)
+            {
+                Console.WriteLine($"{s.First} {s.Last}");
+            }
+        }
+
+        Console.WriteLine("=========================================");
+        Console.WriteLine("LINQ - Operators (Average, Max...");
+        Console.WriteLine("=========================================");
+
+        Console.WriteLine("Average");
+        Console.WriteLine(list.Average());
+
+        Console.WriteLine("Max");
+        Console.WriteLine(list.Max());
+
+        Console.WriteLine("Min");
+        Console.WriteLine(list.Min());
+
+        Console.WriteLine("Sum");
+        Console.WriteLine(list.Sum());
+
+        Console.WriteLine("Count");
+        Console.WriteLine(list.Count());
+
 
     }
 
