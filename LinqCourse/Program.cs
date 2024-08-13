@@ -217,6 +217,64 @@ internal class Program
             Name = "Diego"
         };
         Console.WriteLine(a.Name);
+
+
+        // Create an anonymous object with three properties: Name, Age and FavouriteFood.
+        // Be careful with the capitalization of the properties!
+        static Type Run(string name, int age, string favouriteFood)
+        {
+            var a = new { Name = name, Age = age, FavouriteFood = favouriteFood }; //FILL THIS CODE
+
+            return a.GetType();
+        }
+
+        Console.WriteLine(Run("Diego", 25, "Pizza"));
+
+
+        //Linq with Objects
+
+        Console.WriteLine("Linq with Objects");
+        var list = new List<int>();
+        list.Add(1);
+        list.Add(2);
+        list.Add(3);
+
+        var emptyList = new List<int>();
+
+        Console.WriteLine("Count");
+        Console.WriteLine(list.Count);
+
+        Console.WriteLine("First");
+        Console.WriteLine(list.First());
+
+        Console.WriteLine("First");
+        Console.WriteLine(list.First());
+
+        Console.WriteLine("FirstOrDefault with Empty List");
+        Console.WriteLine(emptyList.FirstOrDefault());
+
+        Console.WriteLine("Last");
+        Console.WriteLine(list.Last());
+
+        Console.WriteLine("Last Or Default");
+        Console.WriteLine(emptyList.LastOrDefault());
+
+        Console.WriteLine("Single");
+        Console.WriteLine(list.Single(s => s.Equals(1)));
+
+
+        Console.WriteLine("Single Or Default with Empty List");
+        Console.WriteLine(emptyList.SingleOrDefault(s => s.Equals(1)));
+
+
+        Console.WriteLine("Element 2");
+        Console.WriteLine(list.ElementAt(2));
+
+        Console.WriteLine("Element Or Default 99");
+        Console.WriteLine(list.ElementAtOrDefault(99));
+
+
+
     }
 
 
