@@ -355,8 +355,59 @@ internal class Program
         Console.WriteLine("Distinct");
         foreach (var s in listWithDistinct) { Console.WriteLine(s); };
 
+        Console.WriteLine("=========================================");
+        Console.WriteLine("LINQ - List Except, Intersect, Union");
+        Console.WriteLine("=========================================");
+
+        var list1 = new List<int>() { 1, 2, 3, 4 };
+        var list2 = new List<int>() { 4,5,6,7,8 };
+
+        Console.WriteLine("Except");
+        var listExcept = list1.Except(list2);
+        
+        foreach (var s in listExcept) { Console.WriteLine(s); };
+
+        Console.WriteLine("Intersect");
+        var listIntersect = list1.Intersect(list2);
+
+        foreach (var s in listIntersect) { Console.WriteLine(s); };
+
+        Console.WriteLine("Union");
+        var listUnion = list1.Union(list2);
+
+        foreach (var s in listUnion) { Console.WriteLine(s); };
 
 
+        Console.WriteLine("=========================================");
+        Console.WriteLine("LINQ - Select, Select Many");
+        Console.WriteLine("=========================================");
+
+        Console.WriteLine("Select");
+
+        //var ressss = list.Where(n => n > 4).Select(n);
+
+
+        Console.WriteLine("Select Many - String");
+        List<string> strs = new List<string>()
+        {
+            "this is a string",
+            "and a different string",
+            "more strings here"
+        };
+
+        var rs = strs.SelectMany(s => s.Split(" "));
+        foreach (var item in rs) { Console.WriteLine(item);  };
+
+        Console.WriteLine("Select Many - Int");
+        List<List<int>> strInts = new List<List<int>>()
+        {
+            new List<int>() { 1,2,3 },
+            new List<int>() { 4,5,6 },
+            new List<int>() { 7,8,9 }
+        };
+
+        var rsInt = strInts.SelectMany(s => s);
+        foreach (var item in rsInt) { Console.WriteLine(item); };
 
     }
 
