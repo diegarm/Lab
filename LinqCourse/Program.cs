@@ -210,6 +210,16 @@ internal class Program
         foreach (var item in evens)
             Console.WriteLine($"{item}");
 
-
+        Console.WriteLine("Anonymous object");
+        var a = new
+        {
+            Id = 1,
+            Name = "Diego"
+        };
+        Console.WriteLine(a.Name);
     }
+
+
+
+
 }
