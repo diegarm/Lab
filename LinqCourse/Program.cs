@@ -449,7 +449,8 @@ internal class Program
             new Student { First = "Gonzalo", CourseCode = "A02"  },
             new Student { First = "Alejandro", CourseCode = "A01"  },
             new Student { First = "Jorge", CourseCode = "A01"  },
-            new Student { First = "Carlos", CourseCode = "A03"  }
+            new Student { First = "Carlos", CourseCode = "A02"  },
+            new Student { First = "Dr. Pimpoks", CourseCode = string.Empty  }
         };
 
         var listCourses = new List<Course>()
@@ -507,12 +508,25 @@ internal class Program
             s => s.Courses.DefaultIfEmpty().Select(c => new
             {
                 s.First,
-                Course = c.Code,
-                Description = c.Name
+                Course = c is null ? string.Empty : c.Code,
+                Description = c is null ? string.Empty : c.Name
             })
         );
 
         foreach (var item in groupedStudents) { Console.WriteLine(item); };
 
+
+        string[] first = new string[] { "hello", "bye", "good evening", "hello", "bye" };
+        var r = first.GroupBy(p => p.Length).Select(s => new { value = s.Key, lista = s });
+        foreach (var item in r) 
+        { 
+            Console.WriteLine("List: " + item);
+
+            foreach (var item2 in item.lista)
+            {
+                Console.WriteLine("Word: " + item2);
+            }
+        
+        };
     }
 }
