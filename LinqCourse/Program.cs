@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 
 internal class Program
@@ -7,7 +8,7 @@ internal class Program
     public static void DelegateMethod(string message)
     {
        Console.WriteLine(message);
-    }    
+    }
 
     private static void Main(string[] args)
     {
@@ -35,7 +36,7 @@ internal class Program
         myQueue.Enqueue("animal");
         myQueue.Enqueue("people");
 
-        foreach(var i in myQueue)
+        foreach (var i in myQueue)
             Console.WriteLine(i);
 
 
@@ -45,7 +46,7 @@ internal class Program
         myStack.Push("dog");
         myStack.Peek(); // obtain the value of the top stack element
 
-        foreach(var i in myStack)
+        foreach (var i in myStack)
             Console.WriteLine(i);
 
 
@@ -69,7 +70,7 @@ internal class Program
 
         Console.WriteLine("Sorted List");
         SortedList<int, string> mySortedList = new SortedList<int, string>();
-        mySortedList.Add(2,"test");
+        mySortedList.Add(2, "test");
         //mySortedList.Add(2, "txt"); Does not allow duplicated or null keys. Keys must be unique.
         foreach (var item in mySortedList)
             Console.WriteLine(item);
@@ -114,7 +115,8 @@ internal class Program
         string[] words = { "apple", "strawberry", "grape", "peach", "banana", "groove" };
         var wordQuery = words.Where(w => w[0] == 'g');
 
-        foreach (var word in wordQuery){
+        foreach (var word in wordQuery)
+        {
             Console.WriteLine($"{word}", word);
         }
 
@@ -186,8 +188,8 @@ internal class Program
 
         Console.WriteLine("IEnumerable with Where Query");
         var resultQuery = from n1 in numbers
-                  where n1 < 10
-                  select n1;
+                          where n1 < 10
+                          select n1;
 
         foreach (var item in resultQuery)
             Console.WriteLine(item);
@@ -206,7 +208,7 @@ internal class Program
         Console.WriteLine("Evens");
         int[] numbersEvens = { 0, 30, 20, 15, 90, 85, 40, 9 };
         IEnumerable<int> evens = numbersEvens.Where(i => i % 2 == 0);
-        
+
         foreach (var item in evens)
             Console.WriteLine($"{item}");
 
@@ -247,8 +249,8 @@ internal class Program
         Console.WriteLine("First");
         Console.WriteLine(list.First());
 
-        Console.WriteLine("First");
-        Console.WriteLine(list.First());
+        Console.WriteLine("First with condition");
+        //Console.WriteLine(list.First(x => x == 4));
 
         Console.WriteLine("FirstOrDefault with Empty List");
         Console.WriteLine(emptyList.FirstOrDefault());
@@ -282,6 +284,10 @@ internal class Program
 
         Console.WriteLine("Contains(): indicates if the sequence contains the indicated element, one or more times.");
         Console.WriteLine(list.Contains(2));
+
+        Console.Write("Count Letters g");
+        foreach (var item in words.SelectMany(p => p.ToCharArray())) Console.WriteLine(item);
+        Console.WriteLine(words.SelectMany(p => p.ToCharArray()).Where(p => p.Equals('g')).Count());
 
 
 
@@ -345,7 +351,7 @@ internal class Program
         Console.WriteLine("LINQ - List Distinct");
         Console.WriteLine("=========================================");
 
-        var listDistinct = new List<int>() { 1,2,2,3,4,5,6,7,7,8,9,10 };
+        var listDistinct = new List<int>() { 1, 2, 2, 3, 4, 5, 6, 7, 7, 8, 9, 10 };
 
         Console.WriteLine("Without Distinct");
         foreach (var s in listDistinct) { Console.WriteLine(s); };
@@ -360,11 +366,11 @@ internal class Program
         Console.WriteLine("=========================================");
 
         var list1 = new List<int>() { 1, 2, 3, 4 };
-        var list2 = new List<int>() { 4,5,6,7,8 };
+        var list2 = new List<int>() { 4, 5, 6, 7, 8 };
 
         Console.WriteLine("Except");
         var listExcept = list1.Except(list2);
-        
+
         foreach (var s in listExcept) { Console.WriteLine(s); };
 
         Console.WriteLine("Intersect");
@@ -396,7 +402,7 @@ internal class Program
         };
 
         var rs = strs.SelectMany(s => s.Split(" "));
-        foreach (var item in rs) { Console.WriteLine(item);  };
+        foreach (var item in rs) { Console.WriteLine(item); };
 
         Console.WriteLine("Select Many - Int");
         List<List<int>> strInts = new List<List<int>>()
@@ -433,8 +439,80 @@ internal class Program
 
 
         Console.WriteLine("=========================================");
-        Console.WriteLine("LINQ - Join y Group Join");
+        Console.WriteLine("LINQ - Join");
         Console.WriteLine("=========================================");
-    }
 
+
+        var listStudents = new List<Student>() {
+            new Student { First = "Diego Armando Marads", CourseCode = "A01"  },
+            new Student { First = "Jose", CourseCode = "A01"  },
+            new Student { First = "Gonzalo", CourseCode = "A02"  },
+            new Student { First = "Alejandro", CourseCode = "A01"  },
+            new Student { First = "Jorge", CourseCode = "A01"  },
+            new Student { First = "Carlos", CourseCode = "A03"  }
+        };
+
+        var listCourses = new List<Course>()
+        {
+            new Course { Code = "A01", Name = "IT" },
+            new Course { Code = "A02", Name = "BI" },
+            new Course { Code = "A03", Name = "Data Analytic" }
+        };
+
+        var resultLeft = listStudents.Join(
+            listCourses,
+            l => l.CourseCode,
+            r => r.Code,
+            (l, r) => new { l.First, l.CourseCode, NameCourse = r.Name }
+
+        );
+
+        foreach (var item in resultLeft) { Console.WriteLine(item); };
+
+        Console.WriteLine("=========================================");
+        Console.WriteLine("LINQ - Group Join");
+        Console.WriteLine("=========================================");
+
+
+        var linqGouped = listCourses.GroupJoin(listStudents,
+          c => c.Code,
+          s => s.CourseCode,
+          (c, listOfStudents) => new
+          {
+              Course = c.Code,
+              CourseDescription = c.Name,
+              Students = listOfStudents
+          });
+
+        foreach (var item in linqGouped) { Console.WriteLine(String.Format("{0} - Students Count: {1} ",item, item.Students.Count())); };
+
+
+        Console.WriteLine("=========================================");
+        Console.WriteLine("LINQ - Group Join with Select Many");
+        Console.WriteLine("=========================================");
+
+
+        var groupedStudents = listStudents.GroupJoin
+        (
+            listCourses,
+            s => s.CourseCode,
+            c => c.Code,
+            (c, courseCodes) => new
+            {
+                c.First,
+                Courses = courseCodes
+            }
+        ).SelectMany
+        (
+            s => s.Courses.DefaultIfEmpty().Select(c => new
+            {
+                s.First,
+                Course = c.Code,
+                Description = c.Name
+            })
+        );
+
+        foreach (var item in groupedStudents) { Console.WriteLine(item); };
+
+    }
 }
