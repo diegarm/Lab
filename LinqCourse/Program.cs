@@ -409,9 +409,32 @@ internal class Program
         var rsInt = strInts.SelectMany(s => s);
         foreach (var item in rsInt) { Console.WriteLine(item); };
 
+
+
+        Console.WriteLine("=========================================");
+        Console.WriteLine("LINQ - List partition");
+        Console.WriteLine("=========================================");
+
+        var listPartition = new List<int>() { 1, 2, 3, 4, 1, 4 };
+
+        Console.WriteLine("Take 2 - { 1, 2, 3, 4, 1, 4 } ");
+        foreach (var item in listPartition.Take(2)) { Console.WriteLine(item); };
+
+        Console.WriteLine("Skip 2 - { 1, 2, 3, 4, 1, 4 }");
+        foreach (var item in listPartition.Skip(2)) { Console.WriteLine(item); };
+
+
+        Console.WriteLine("Take While (n < 4) - { 1, 2, 3, 4, 1, 4 }");
+        foreach (var item in listPartition.TakeWhile(n => n < 4)) { Console.WriteLine(item); };
+
+
+        Console.WriteLine("Skip While (n % 2 != 0) - { 1, 2, 3, 4, 1, 4 }");
+        foreach (var item in listPartition.SkipWhile(n => n % 2 != 0)) { Console.WriteLine(item); };
+
+
+        Console.WriteLine("=========================================");
+        Console.WriteLine("LINQ - Join y Group Join");
+        Console.WriteLine("=========================================");
     }
-
-
-
 
 }
