@@ -1,6 +1,5 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
+using test;
 
 internal class Program
 {
@@ -516,7 +515,11 @@ internal class Program
         foreach (var item in groupedStudents) { Console.WriteLine(item); };
 
 
-        string[] first = new string[] { "hello", "bye", "good evening", "hello", "bye" };
+        Console.WriteLine("=========================================");
+        Console.WriteLine("LINQ - Group Join with Select");
+        Console.WriteLine("=========================================");
+
+        string[] first = new string[] { "hello", "bye", "good evening", "hello", "bye", "ana" };
         var r = first.GroupBy(p => p.Length).Select(s => new { value = s.Key, lista = s });
         foreach (var item in r) 
         { 
@@ -528,5 +531,47 @@ internal class Program
             }
         
         };
+
+
+        Console.WriteLine("=========================================");
+        Console.WriteLine("Tuples");
+        Console.WriteLine("=========================================");
+
+        (double, int) t1 = (4.5, 3);
+        Console.WriteLine($"Tuple with elements {t1.Item1} and {t1.Item2}.");
+        // Output:
+        // Tuple with elements 4.5 and 3.
+
+        (double Sum, int Count) t2 = (4.5, 3);
+        Console.WriteLine($"Sum of {t2.Count} elements is {t2.Sum}.");
+        // Output:
+        // Sum of 3 elements is 4.5.
+
+
+        Console.WriteLine("=========================================");
+        Console.WriteLine("EXERSICE 1 - TUPLE");
+        Console.WriteLine("=========================================");
+        var listEx1 = new string[] { "a", "d", "b", "c", "e", "f", "g", "a", "a", "b", "a", "d", "b", "c" };
+        var resultExercise1 = Exercise1.Run(listEx1);
+
+        foreach (var item in resultExercise1) { Console.WriteLine(String.Format("{0} - {1} ", item.Item1, item.Item2)); };
+
+        Console.WriteLine("=========================================");
+        Console.WriteLine("EXERSICE 2 - SEARCH");
+        Console.WriteLine("=========================================");
+        var listEx2 = new string[] { "a", "d", "b", "c", "e", "f", "g", "a", "a", "b", "a", "d", "b", "c" };
+        var resultExercise2 = Exercise2.Run(listEx1,"xa");
+
+        Console.WriteLine(resultExercise2);
+
+
+        Console.WriteLine("=========================================");
+        Console.WriteLine("EXERSICE 3 - GROUP BY WITH SINGLE ");
+        Console.WriteLine("=========================================");
+        var listEx3 = new string[] { "a", "d", "b", "c", "e", "f", "g", "a", "a", "b", "a", "d", "b", "z" };
+        var listExr = new string[] { "a", "aa", "aaa", "aaaa", "aaaaa", "aa" };
+
+        var resultExercise3 = Exercise3.Run(listExr, "aa");
+        Console.WriteLine(resultExercise3);
     }
 }
