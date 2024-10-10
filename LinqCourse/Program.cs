@@ -11,6 +11,20 @@ internal class Program
 
     private static void Main(string[] args)
     {
+        DateTime? dt1 = new DateTime(2024, 10, 01, 15, 10, 40);
+        DateTime? dt2 = new DateTime(2024, 10, 01, 12, 10, 40);
+
+        Console.WriteLine(DateTime.UtcNow.AddDays(85));
+
+        Console.WriteLine(dt2.Value.Subtract(dt1.Value).TotalHours);
+
+
+        if (dt1.Value.Date >= dt2.Value.Date)
+        {
+            Console.WriteLine("Teste");
+        }        
+        
+
         ArrayList myArrayList = new ArrayList();
         myArrayList.Add("hello"); //adding elements
         myArrayList.Add("298");
