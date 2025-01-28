@@ -26,7 +26,7 @@
             Console.Write($"{element}, ");
         }
 
-        Console.WriteLine("End - Collection expression [.. row0, .. row1, .. row2]");
+        Console.WriteLine("End - Collection expression [.. row0, .. row1, .. row2 ]");
 
 
 
