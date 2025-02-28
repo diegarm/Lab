@@ -587,5 +587,6 @@ internal class Program
 
         var resultExercise3 = Exercise3.Run(listExr, "aa");
         Console.WriteLine(resultExercise3);
+        Console.ReadKey();
     }
 }

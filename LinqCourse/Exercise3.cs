@@ -10,8 +10,17 @@ namespace test
         // exception otherwise.
         public static string Run(string[] testset, string search_value)
         {
-            var r = testset.Single(e => e == search_value);
-            return r;
+            try
+            {
+                var r = testset.Single(e => e == search_value);
+                return r;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                return string.Empty;
+            }
+            
         }
     }
 }
