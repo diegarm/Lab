@@ -563,7 +563,7 @@ internal class Program
 
 
         Console.WriteLine("=========================================");
-        Console.WriteLine("EXERSICE 1 - TUPLE");
+        Console.WriteLine("EXERCISE 1 - TUPLE");
         Console.WriteLine("=========================================");
         var listEx1 = new string[] { "a", "d", "b", "c", "e", "f", "g", "a", "a", "b", "a", "d", "b", "c" };
         var resultExercise1 = Exercise1.Run(listEx1);
@@ -571,7 +571,7 @@ internal class Program
         foreach (var item in resultExercise1) { Console.WriteLine(String.Format("{0} - {1} ", item.Item1, item.Item2)); };
 
         Console.WriteLine("=========================================");
-        Console.WriteLine("EXERSICE 2 - SEARCH");
+        Console.WriteLine("EXERCISE 2 - SEARCH");
         Console.WriteLine("=========================================");
         var listEx2 = new string[] { "a", "d", "b", "c", "e", "f", "g", "a", "a", "b", "a", "d", "b", "c" };
         var resultExercise2 = Exercise2.Run(listEx1,"xa");
@@ -580,13 +580,20 @@ internal class Program
 
 
         Console.WriteLine("=========================================");
-        Console.WriteLine("EXERSICE 3 - GROUP BY WITH SINGLE ");
+        Console.WriteLine("EXERCISE 3 - GROUP BY WITH SINGLE ");
         Console.WriteLine("=========================================");
         var listEx3 = new string[] { "a", "d", "b", "c", "e", "f", "g", "a", "a", "b", "a", "d", "b", "z" };
         var listExr = new string[] { "a", "aa", "aaa", "aaaa", "aaaaa", "aa" };
 
         var resultExercise3 = Exercise3.Run(listExr, "aa");
         Console.WriteLine(resultExercise3);
+
+
+        Console.WriteLine("=========================================");
+        Console.WriteLine("EXERCISE 4 - PERFORMANCE");
+        Console.WriteLine("=========================================");
+        Exercise4.Run();       
+
         Console.ReadKey();
     }
 }

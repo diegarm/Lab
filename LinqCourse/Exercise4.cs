@@ -2,22 +2,56 @@
 using System.Collections.Generic;
 using System.Linq;
 
-// Practical activities. This file is provided as a template, do not change the class, methods or variable names,
-// just add your code in the sections marked with the "PUT YOUR CODE HERE" comment.
-
-namespace mecalux.training.linq.exercises.linq_objects
+namespace test
 {
     public static class Exercise4
     {
-        // Classify the given list of strings into groups where the strings with the same length are included.
-        // Order the resulting collection by the length of the strings and return it.
-        //For instance: for a collection of strings: "one","two","three","four","five" you should return the following colletion:
-        //{"one","two"} => strings of length three.
-        //{"four", "five"} => strings of length four.
-        //{"three"} => strings of length five.
-        public static IEnumerable<IGrouping<int, string>> Run(string[] testset)
+        // Comparison of LINQ queries.
+        public static void Run()
         {
-            return testset.GroupBy(e => e.Length);
+            var list = new List<Person>();
+            int seed = 200000000;
+
+            for (int i = 0; i < seed; i++)  list.Add(new Person());
+
+            Console.WriteLine("Start - list.Where(c => c.balance > 1000000).Count() > 0");
+            var time = DateTime.Now;
+            if (list.Where(c => c.balance > 1000000).Count() > 0)
+            {
+                Console.WriteLine(String.Format("End - {0} ms", DateTime.Now.Subtract(time).TotalMilliseconds));
+                
+            }
+
+            time = DateTime.Now;
+            Console.WriteLine("Start - list.Any(c => c.balance > 1000000)");
+            if (list.Any(c => c.balance > 1000000))
+            {
+                Console.WriteLine(String.Format("End - {0} ms", DateTime.Now.Subtract(time).TotalMilliseconds));
+            }
+
+            time = DateTime.Now;
+            Console.WriteLine("Start - list.Any(c => c.station == 1)");
+            if (list.Any(c => c.station == 1))
+            {
+                Console.WriteLine(String.Format("End - {0} ms", DateTime.Now.Subtract(time).TotalMilliseconds));
+            }
+
+            time = DateTime.Now;
+            Console.WriteLine("Start - list.Where(c => c.station == 1).Count() > 0");
+            if (list.Where(c => c.station == 1).Count() > 0)
+            {
+                Console.WriteLine(String.Format("End - {0} ms", DateTime.Now.Subtract(time).TotalMilliseconds));
+            }
+
         }
     }
+
+    class Person
+    {
+        public Guid Id = Guid.NewGuid();
+        public int station = Random.Shared.Next(1, 10);
+        public int balance = Random.Shared.Next(1, 1000000000);
+
+    }
+
 }
