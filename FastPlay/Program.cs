@@ -5,7 +5,7 @@ using System.Globalization;
 
 
 Console.WriteLine("Date Format");
-DateTime dt = DateTime.Now;
+DateTime dt = new DateTime(1999,12,31,22,59,59);
 
 System.Globalization.CultureInfo culture = new System.Globalization.CultureInfo("es");
 
