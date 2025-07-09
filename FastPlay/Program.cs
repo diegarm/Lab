@@ -5,9 +5,19 @@ using System.Globalization;
 
 
 Console.WriteLine("Date Format");
-DateTime dt = new DateTime(1999,12,31,22,59,59);
+DateTime dt = DateTime.UtcNow;
 
-System.Globalization.CultureInfo culture = new System.Globalization.CultureInfo("es");
+var culture = new CultureInfo("es");
+
+Func<DateTime, TimeZoneInfo, TimeSpan> GetOffset = (date, tInfo) =>
+{
+    TimeSpan timeZoneOffSet = tInfo.IsDaylightSavingTime(date) ? tInfo.BaseUtcOffset.Add(TimeSpan.FromHours(1)) : tInfo.BaseUtcOffset;
+    return timeZoneOffSet;
+};
+
+TimeZoneInfo timeInfo = TimeZoneInfo.FindSystemTimeZoneById("Romance Standard Time");
+
+dt = dt.Add(GetOffset(dt, timeInfo));
 
 Console.WriteLine(dt.ToString("d", culture));  // Data curta
 Console.WriteLine(dt.ToString("D", culture));  // Data longa
@@ -16,7 +26,7 @@ Console.WriteLine(dt.ToString("T", culture));  // Hora longa
 Console.WriteLine(dt.ToString("f", culture));  // Data longa + hora curta
 Console.WriteLine(dt.ToString("F", culture));  // Data longa + hora longa
 Console.WriteLine(dt.ToString("g", culture));  // Data curta + hora curta
-Console.WriteLine(dt.ToString("G", culture));  // Data curta + hora longa
+Console.WriteLine(dt.ToString("G"));  // Data curta + hora longa
 Console.WriteLine(dt.ToString("M", culture));  // Mês e dia
 Console.WriteLine(dt.ToString("Y", culture));  // Mês e ano
 Console.WriteLine(dt.ToString("O", culture));  // ISO 8601 completo
