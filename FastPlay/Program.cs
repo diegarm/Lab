@@ -34,3 +34,17 @@ Console.WriteLine(dt.ToString("R", culture));  // RFC1123
 Console.WriteLine(dt.ToString("s", culture));  // ISO 8601 sem fuso horário
 Console.WriteLine(dt.ToString("u", culture));  // Universal sortable (UTC)
 
+
+var list = new List<string>() { "AbCd", "eFgH" };
+var list2 = new List<string>() { "AbCd", "efgh" };
+
+var commandCodeSet = new HashSet<string>(list, StringComparer.OrdinalIgnoreCase);
+
+
+var appointmentActivityCodesToAdd = list2.Where(r => !commandCodeSet.Contains(r));
+
+foreach (var item in appointmentActivityCodesToAdd)
+{
+    Console.WriteLine(item.ToString());
+}
+
