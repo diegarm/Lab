@@ -1,0 +1,12 @@
+O link para o reportgenerator:
+https://reportgenerator.io/
+
+Para instalar as ferramentas de CLI:
+dotnet tool install --global coverlet.console
+dotnet tool install -g dotnet-reportgenerator-globaltool
+
+Para rodar o test capturando o coverage:
+dotnet test --collect "Xplat Code Coverage"
+
+Um comando de exemplo para gerar o relatório do coverage:
+reportgenerator "-reports:.\TestResults\6e3a726f-a40c-425e-89d4-1f4fca01d926\coverage.cobertura.xml" "-targetdir:coveragereport" -reporttypes:Html
